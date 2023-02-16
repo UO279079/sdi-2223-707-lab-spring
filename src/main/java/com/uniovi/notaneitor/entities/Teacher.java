@@ -1,12 +1,23 @@
 package com.uniovi.notaneitor.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Teacher {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String dni;
     private String name;
     private String surname;
     private String category;
+
+    public Teacher(){
+
+    }
 
     public Teacher(Long id, String dni, String name, String surname, String category) {
         this.id = id;

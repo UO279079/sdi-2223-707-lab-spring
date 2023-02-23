@@ -47,4 +47,8 @@ public class UsersService {
         return usersRepository.findByDni(dni);
     }
 
+    public void editUser(User user){
+        usersRepository.save(user);
+    }
+
 }

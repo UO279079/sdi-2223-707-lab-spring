@@ -16,6 +16,8 @@ public class Mark {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private Boolean resend = false;
+
     public Mark() {
     }
 
@@ -71,5 +73,12 @@ public class Mark {
         if (o == null || getClass() != o.getClass()) return false;
         Mark mark = (Mark) o;
         return Objects.equals(id, mark.id);
+    }
+
+    public Boolean getResend() {
+        return resend;
+    }
+    public void setResend(Boolean resend) {
+        this.resend = resend;
     }
 }

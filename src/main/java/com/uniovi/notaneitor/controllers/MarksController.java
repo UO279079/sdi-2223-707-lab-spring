@@ -27,16 +27,9 @@ public class MarksController {
     @Autowired
     private AddMarkFormValidator addMarkFormValidator;
 
-    @Autowired
-    private HttpSession httpSession;
 
     @RequestMapping("/mark/list")
     public String getList(Model model) {
-        Set<Mark> consultedList= (Set<Mark>) httpSession.getAttribute("consultedList");
-        if ( consultedList == null ) {
-            consultedList = new HashSet<Mark>();
-        }
-        model.addAttribute("consultedList", consultedList);
         model.addAttribute("markList", marksService.getMarks());
         return "mark/list";
     }
@@ -51,7 +44,7 @@ public class MarksController {
     @RequestMapping(value = "/mark/add", method = RequestMethod.POST)
     public String setMark(@Validated Mark mark, BindingResult result, Model model) {
         addMarkFormValidator.validate(mark, result);
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             model.addAttribute("usersList", usersService.getUsers());
             return "mark/add";
         }
@@ -59,6 +52,7 @@ public class MarksController {
         marksService.addMark(mark);
         return "redirect:/mark/list";
     }
+
     @RequestMapping("/mark/details/{id}")
     public String getDetail(Model model, @PathVariable Long id) {
         model.addAttribute("mark", marksService.getMark(id));
@@ -66,7 +60,7 @@ public class MarksController {
     }
 
     @RequestMapping("/mark/delete/{id}")
-    public String deleteMark(@PathVariable Long id){
+    public String deleteMark(@PathVariable Long id) {
         marksService.deleteMark(id);
         return "redirect:/mark/list";
     }
@@ -79,7 +73,7 @@ public class MarksController {
     }
 
     @RequestMapping(value = "/mark/edit/{id}", method = RequestMethod.POST)
-    public String setEdit(@ModelAttribute Mark mark, @PathVariable Long id){
+    public String setEdit(@ModelAttribute Mark mark, @PathVariable Long id) {
         Mark originalMark = marksService.getMark(id);
         originalMark.setScore(mark.getScore());
         originalMark.setDescription(mark.getDescription());
@@ -88,8 +82,8 @@ public class MarksController {
     }
 
     @RequestMapping("/mark/list/update")
-    public String updateList(Model model){
-        model.addAttribute("markList", marksService.getMarks() );
+    public String updateList(Model model) {
+        model.addAttribute("markList", marksService.getMarks());
         return "mark/list :: tableMarks";
     }
 

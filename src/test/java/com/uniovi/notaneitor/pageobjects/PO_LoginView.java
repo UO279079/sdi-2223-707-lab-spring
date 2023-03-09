@@ -28,4 +28,17 @@ public class PO_LoginView extends PO_NavView{
                 getTimeout());
         languageButton.get(0).click();
     }
+
+    static public void login(WebDriver driver, String username, String password, String checkText){
+        //Vamos al formulario de login.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, username, password);
+        //Cmmprobamos que entramos en la pagina privada del Profesor
+        PO_View.checkElementBy(driver, "text", checkText);
+    }
+
+    static public void getLogout(WebDriver driver, String checkText){
+        //Ahora nos desconectamos y comprobamos que aparece el menú de registro
+        PO_PrivateView.clickOption(driver, "logout", "text", checkText);
+    }
 }

@@ -31,4 +31,29 @@ public class PO_PrivateView extends PO_NavView {
         List<WebElement> elements = PO_View.checkElementBy(driver, "free", path);
         elements.get(option).click();
     }
+
+    static public void fillFormAddTeacher(WebDriver driver, String dnip, String namep, String surnamep, String categoryp){
+        WebElement dni = driver.findElement(By.name("dni"));
+        dni.click();
+        dni.clear();
+        dni.sendKeys(dnip);
+
+        WebElement name = driver.findElement(By.name("name"));
+        name.click();
+        name.clear();
+        name.sendKeys(namep);
+
+        WebElement surname = driver.findElement(By.name("surname"));
+        surname.click();
+        surname.clear();
+        surname.sendKeys(surnamep);
+
+        WebElement category = driver.findElement(By.name("category"));
+        category.click();
+        category.clear();
+        category.sendKeys(categoryp);
+        //Pulsar el boton de Alta.
+        By boton = By.className("btn");
+        driver.findElement(boton).click();
+    }
 }
